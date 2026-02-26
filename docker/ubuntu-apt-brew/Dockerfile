@@ -1,4 +1,4 @@
-ARG IMAGE_OWNER
+ARG IMAGE_OWNER=example
 ARG BASE_TAG=24.04
 FROM ghcr.io/${IMAGE_OWNER}/base-ubuntu-apt:${BASE_TAG}
 
