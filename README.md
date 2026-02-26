@@ -28,12 +28,12 @@ GHCR 재사용형 CI 베이스 이미지 배포 저장소.
 
 워크플로 파일: `.github/workflows/publish-base-images.yml`
 
-동작 순서.
+동작 규칙.
 
 1. 날짜 태그(`YYYYMMDD`) 계산
-2. `base-ubuntu-apt` 빌드/푸시
-3. `base-ubuntu-brew` 빌드/푸시
-4. 동일 날짜 `base-ubuntu-apt` 기반 `base-ubuntu-apt-brew` 빌드/푸시
+2. `schedule`/`workflow_dispatch`: 3개 이미지 전체 빌드/푸시
+3. `push`: 변경된 Dockerfile/패키지 기준 선택 빌드
+4. `base-ubuntu-apt` 변경 시 `base-ubuntu-apt-brew` 동시 빌드
 
 트리거 조건.
 
