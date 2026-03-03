@@ -137,8 +137,10 @@ jobs:
             ghcr.io/${{ needs.prepare.outputs.owner_lc }}/base-ubuntu-brew:24.04-${{ needs.prepare.outputs.date_tag }}
 
   ubuntu-apt-brew:
-    needs: prepare
-    if: needs.prepare.outputs.build_apt_brew == 'true'
+    needs:
+      - prepare
+      - ubuntu-apt
+    if: needs.prepare.outputs.build_apt_brew == 'true' && (needs.ubuntu-apt.result == 'success' || needs.ubuntu-apt.result == 'skipped')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
