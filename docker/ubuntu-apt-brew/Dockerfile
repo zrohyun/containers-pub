@@ -1,6 +1,4 @@
-ARG IMAGE_OWNER=example
-ARG BASE_TAG=24.04
-FROM ghcr.io/${IMAGE_OWNER}/base-ubuntu-apt:${BASE_TAG}
+FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV NONINTERACTIVE=1
@@ -8,7 +6,13 @@ ENV HOMEBREW_NO_ANALYTICS=1
 ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends file procps build-essential \
+    && apt-get install -y --no-install-recommends \
+      ca-certificates \
+      curl \
+      git \
+      build-essential \
+      procps \
+      file \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m -s /bin/bash linuxbrew \
